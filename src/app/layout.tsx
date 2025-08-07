@@ -27,6 +27,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <header className="bg-gray-100 shadow">
+          <div className="max-w-6xl mx-auto flex items-center justify-between p-4">
+            <h1 className="text-3xl font-bold">Flight Search App</h1>
+          </div>
+        </header>
         {children}
       </body>
     </html>
