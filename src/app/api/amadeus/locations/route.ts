@@ -1,7 +1,7 @@
 // WE CAN ALOSO USE SDK
 
 import { env } from "@/data/env/client";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
@@ -22,13 +22,13 @@ export async function GET(request: NextRequest) {
     );
 
     if (!res.ok) {
-      Response.json("Failed to fetch locations", { status: 500 });
+      NextResponse.json("Failed to fetch locations", { status: 500 });
     }
 
     const data = await res.json();
-    return Response.json(data);
+    return NextResponse.json(data);
   } catch (error) {
     console.log(error);
-    Response.json(error, { status: 500 });
+    NextResponse.json(error, { status: 500 });
   }
 }
