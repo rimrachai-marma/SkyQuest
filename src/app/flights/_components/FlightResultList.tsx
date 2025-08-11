@@ -2,7 +2,6 @@ import React from "react";
 
 import FlightResultCard from "./FlightResultCard";
 import { fetchFlights } from "@/lib/api/flights";
-import FlightResultCardSkeleton from "./FlightResultCardSkeleton";
 
 interface Props {
   query: Record<string, string>;
@@ -11,9 +10,9 @@ interface Props {
 const FlightResultList: React.FC<Props> = async ({ query }) => {
   const flights = await fetchFlights(query);
 
-  if (!flights.data || flights.data.length === 0) {
+  if (!flights.data || flights.data.length < 1) {
     return (
-      <div className="pt-10">
+      <div className="pt-8">
         <p className="text-2xl font-semibold text-center text-gray-500">
           😔 No flights found! Try adjusting your search.
         </p>
@@ -22,7 +21,7 @@ const FlightResultList: React.FC<Props> = async ({ query }) => {
   }
 
   return (
-    <div className="space-y-4">
+    <>
       {flights.data?.map((flight: any) => (
         <FlightResultCard
           key={flight.id}
@@ -35,9 +34,7 @@ const FlightResultList: React.FC<Props> = async ({ query }) => {
           currencies={flights.dictionaries.currencies}
         />
       ))}
-
-      <FlightResultCardSkeleton />
-    </div>
+    </>
   );
 };
 

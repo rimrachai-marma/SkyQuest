@@ -1,17 +1,17 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 
 const FlightResultCardSkeleton: React.FC = () => {
   return (
-    <div className="space-y-4">
+    <>
       {Array.from({ length: 5 }).map((_, index) => (
         <div
           key={index}
           className="border rounded-lg p-4 shadow-sm bg-white w-full max-w-4xl mx-auto hover:shadow-md transition-shadow"
         >
           {[1, 2].map((_, i) => (
-            <div key={i}>
+            <Fragment key={i}>
               <div className="flex items-center justify-around py-4">
                 {/* Departure */}
                 <div className="text-center space-y-1">
@@ -47,7 +47,7 @@ const FlightResultCardSkeleton: React.FC = () => {
                   <Skeleton className="h-3 w-40 mx-auto" />
                 </div>
               )}
-            </div>
+            </Fragment>
           ))}
 
           {/* Price & Select Button */}
@@ -60,7 +60,7 @@ const FlightResultCardSkeleton: React.FC = () => {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

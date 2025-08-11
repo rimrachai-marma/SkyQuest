@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import FlightResultList from "./_components/FlightResultList";
-import FlightResultCardSkeleton from "./_components/FlightResultCardSkeleton";
+import FlightResultCardSkeleton from "./_components/ui/FlightResultCardSkeleton";
 
 export const dynamic = "force-dynamic";
 const FlightsPage: React.FC = async (props: {
@@ -55,20 +55,21 @@ const FlightsPage: React.FC = async (props: {
     query.infants = infants;
   }
 
-  if (Object.keys(query).length === 0)
-    return (
-      <div className="pt-20">
-        <p className="text-2xl font-semibold text-center">
-          ✈️ Find Your Perfect Flight!
-        </p>
-      </div>
-    );
-
   return (
-    <div className="py-12">
-      <Suspense fallback={<FlightResultCardSkeleton />}>
-        <FlightResultList query={query} />
-      </Suspense>
+    <div className="py-10">
+      {Object.keys(query).length < 1 ? (
+        <div className="pt-8">
+          <p className="text-2xl font-semibold text-center">
+            ✈️ Find Your Perfect Flight!
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          <Suspense fallback={<FlightResultCardSkeleton />}>
+            <FlightResultList query={query} />
+          </Suspense>
+        </div>
+      )}
     </div>
   );
 };

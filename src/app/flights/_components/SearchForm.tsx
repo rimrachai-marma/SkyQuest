@@ -7,6 +7,7 @@ import AsyncSelect from "react-select/async";
 import { addYears, format } from "date-fns";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import {
   Select,
@@ -66,6 +67,7 @@ const SearchForm: React.FC = () => {
         iataCode: "",
         cityName: "",
         countryName: "",
+
         label: "",
         value: "",
       },
@@ -76,11 +78,16 @@ const SearchForm: React.FC = () => {
         iataCode: "",
         cityName: "",
         countryName: "",
+
+        label: "",
+        value: "",
       },
+      departureDate: undefined,
+      returnDate: undefined,
     },
   });
-  const passengers = form.watch("passengers");
 
+  const passengers = form.watch("passengers");
   //  Helper values
   const seated = passengers.adults + passengers.children;
   const totalPassengers =
@@ -317,7 +324,10 @@ const SearchForm: React.FC = () => {
               )}
             />
           </div>
+
+          {/* Location AND Date */}
           <div className="flex flex-col md:flex-row gap-2">
+            {/* Location */}
             <div className="flex gap-2 w-full">
               {/*  Origin Location */}
               <Controller
@@ -371,11 +381,14 @@ const SearchForm: React.FC = () => {
                 )}
               />
             </div>
+
+            {/* Date */}
             <div
               className={`flex gap-2 w-full ${
                 tripType === "one-way" && "md:w-1/2"
               }`}
             >
+              {/* Departure Date */}
               <FormField
                 control={form.control}
                 name="departureDate"
@@ -420,6 +433,7 @@ const SearchForm: React.FC = () => {
                 )}
               />
 
+              {/* Return Date IF round trip */}
               {tripType === "round-trip" && (
                 <FormField
                   control={form.control}
@@ -468,6 +482,7 @@ const SearchForm: React.FC = () => {
             </div>
           </div>
 
+          {/* Search button */}
           <Button
             size="lg"
             variant="outline"
