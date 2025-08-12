@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const interSans = Inter({
   variable: "--font-inter-sans",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
