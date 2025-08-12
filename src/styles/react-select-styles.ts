@@ -2,7 +2,7 @@ import { StylesConfig } from "react-select";
 
 export const reactSlectStyles = (
   hasError: boolean
-): StylesConfig<any, false> => ({
+): StylesConfig<unknown, boolean> => ({
   container: (provided) => ({
     ...provided,
     width: "100%",

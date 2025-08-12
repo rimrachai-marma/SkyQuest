@@ -45,6 +45,8 @@ import { fetchLocations } from "@/lib/api/locations";
 import { SearchFormSchema } from "@/lib/schemas/searchform.schema";
 import { Calendar } from "@/components/ui/calendar";
 import { reactSlectStyles } from "@/styles/react-select-styles";
+import { LocationsApiResponse } from "@/lib/types/api-response-types/locations";
+import { LocationData } from "@/lib/types";
 
 const SearchForm: React.FC = () => {
   const router = useRouter();
@@ -134,8 +136,8 @@ const SearchForm: React.FC = () => {
   };
 
   const searchLocations = async (keyword: string) => {
-    const locations = await fetchLocations(keyword);
-    return locations.data?.map((location: any) => ({
+    const locations: LocationsApiResponse = await fetchLocations(keyword);
+    return locations.data?.map((location: LocationData) => ({
       id: location.id,
       name: location.name,
       iataCode: location.iataCode,

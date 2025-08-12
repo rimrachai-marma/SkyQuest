@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import FlightResultList from "./_components/FlightResultList";
 import FlightResultCardSkeleton from "./_components/ui/FlightResultCardSkeleton";
 
-export const dynamic = "force-dynamic";
 const FlightsPage: React.FC = async (props: {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
@@ -57,13 +56,7 @@ const FlightsPage: React.FC = async (props: {
 
   return (
     <div className="py-10">
-      {Object.keys(query).length < 1 ? (
-        <div className="pt-8">
-          <p className="text-2xl font-semibold text-center">
-            ✈️ Find Your Perfect Flight!
-          </p>
-        </div>
-      ) : (
+      {Object.keys(query).length > 0 && (
         <div className="space-y-4">
           <Suspense fallback={<FlightResultCardSkeleton />}>
             <FlightResultList query={query} />

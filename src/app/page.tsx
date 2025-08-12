@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  await new Promise((resolve) => setTimeout(resolve, 20000));
   return (
     <main className="max-w-6xl mx-auto px-2 md:px-4">
       <div className="text-center space-y-4 pt-20">

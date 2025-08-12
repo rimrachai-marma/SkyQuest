@@ -2,13 +2,15 @@ import React from "react";
 
 import FlightResultCard from "./FlightResultCard";
 import { fetchFlights } from "@/lib/api/flights";
+import { FlightsApiResponse } from "@/lib/types/api-response-types/flights";
+import { FlightData } from "@/lib/types";
 
 interface Props {
   query: Record<string, string>;
 }
 
 const FlightResultList: React.FC<Props> = async ({ query }) => {
-  const flights = await fetchFlights(query);
+  const flights: FlightsApiResponse = await fetchFlights(query);
 
   if (!flights.data || flights.data.length < 1) {
     return (
@@ -20,20 +22,25 @@ const FlightResultList: React.FC<Props> = async ({ query }) => {
     );
   }
 
+  const { locations, aircraft, carriers, currencies } = flights.dictionaries;
+
   return (
     <>
-      {flights.data?.map((flight: any) => (
-        <FlightResultCard
-          key={flight.id}
-          segments={flight.itineraries[0].segments}
-          duration={flight.itineraries[0].duration}
-          price={flight.price}
-          locations={flights.dictionaries.locations}
-          aircraft={flights.dictionaries.aircraft}
-          carriers={flights.dictionaries.carriers}
-          currencies={flights.dictionaries.currencies}
-        />
-      ))}
+      {flights.data.map((flight: FlightData) => {
+        const [itinerary] = flight.itineraries;
+        return (
+          <FlightResultCard
+            key={flight.id}
+            segments={itinerary.segments}
+            duration={itinerary.duration}
+            price={flight.price}
+            locations={locations}
+            aircraft={aircraft}
+            carriers={carriers}
+            currencies={currencies}
+          />
+        );
+      })}
     </>
   );
 };

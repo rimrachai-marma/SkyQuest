@@ -1,24 +1,13 @@
-export type Location = {
-  cityCode: string;
-  countryCode: string;
-};
+import {
+  Price as ResponsePrice,
+  Location as ResponseLocation,
+  Segment as ResponseSegment,
+  FlightData as ResponseFlightData,
+} from "./api-response-types/flights";
+import { LocationData as ResponseLocationData } from "./api-response-types/locations";
 
-export type Price = {
-  currency: string;
-  total: string;
-  base: string;
-  fees: { amount: string; type: string }[];
-  grandTotal: string;
-};
-export type Segment = {
-  departure: { iataCode: string; terminal?: string; at: string };
-  arrival: { iataCode: string; terminal?: string; at: string };
-  carrierCode: string;
-  number: string;
-  aircraft: { code: string };
-  operating: { carrierCode: string };
-  duration: string;
-  id: string;
-  numberOfStops: number;
-  blacklistedInEU: boolean;
-};
+export type Location = ResponseLocation;
+export type Price = ResponsePrice;
+export type Segment = ResponseSegment;
+export type FlightData = ResponseFlightData;
+export type LocationData = ResponseLocationData;
